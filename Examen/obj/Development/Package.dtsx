@@ -1,0 +1,2646 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/30/2022 8:16:31 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SISTEMA37"
+  DTS:CreatorName="SISTEMA37\Sistemas36"
+  DTS:DTSID="{53BC0205-8D1F-40D0-BB90-101607192019}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.180"
+  DTS:LocaleID="19466"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{A344A50E-D4EB-432E-A782-1739B15E379D}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SISTEMA37\SQLSERVER2019.AdventureWorks2019]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{7AF917C9-3352-46C4-8C92-C8EB1A774876}"
+      DTS:ObjectName="SISTEMA37\SQLSERVER2019.AdventureWorks2019">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=SISTEMA37\SQLSERVER2019;Initial Catalog=AdventureWorks2019;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Dimensiones"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{02B6F4E9-1E3C-462D-B4DE-EA8A114A8E41}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Dimensiones">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Dimensiones\CreditCardDim"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Tarea Flujo de datos"
+          DTS:DTSID="{A14DAF2A-E1A9-4E33-B2C2-616971482264}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="CreditCardDim"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Dimensiones\CreditCardDim\Columna derivada"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Columna derivada;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
+                  description="Crea nuevos valores de columna aplicando expresiones a las columnas de entrada de la transformación. Crea nuevas columnas o sobrescribe las columnas existentes. Por ejemplo, se concatenan los valores de las columnas 'nombre' y 'apellidos' para crear una columna 'nombre completo'."
+                  name="Columna derivada"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Dimensiones\CreditCardDim\Columna derivada.Inputs[Entrada de columna derivada]"
+                      description="Entrada en la transformación Columna derivada"
+                      name="Entrada de columna derivada">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Dimensiones\CreditCardDim\Columna derivada.Outputs[Salida de columna derivada]"
+                      description="Salida predeterminada de la transformación Columna derivada"
+                      exclusionGroup="1"
+                      name="Salida de columna derivada"
+                      synchronousInputId="Package\Dimensiones\CreditCardDim\Columna derivada.Inputs[Entrada de columna derivada]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Columna derivada.Outputs[Salida de columna derivada].Columns[FechaFinal]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Cálculo"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Dimensiones\CreditCardDim\Columna derivada.Outputs[Salida de columna derivada].Columns[FechaFinal]"
+                          name="FechaFinal"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expresión de columna derivada"
+                              name="Expression">(DT_DBDATE)[GETDATE]()</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expresión descriptiva de columna derivada"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_DBDATE)GETDATE()</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Dimensiones\CreditCardDim\Columna derivada.Outputs[Salida de error de columna derivada]"
+                      description="Salida de error de la transformación Columna derivada"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Salida de error de columna derivada"
+                      synchronousInputId="Package\Dimensiones\CreditCardDim\Columna derivada.Inputs[Entrada de columna derivada]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Columna derivada.Outputs[Salida de error de columna derivada].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Dimensiones\CreditCardDim\Columna derivada.Outputs[Salida de error de columna derivada].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Columna derivada.Outputs[Salida de error de columna derivada].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Dimensiones\CreditCardDim\Columna derivada.Outputs[Salida de error de columna derivada].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Dimensiones\CreditCardDim\Columna derivada 1"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Columna derivada;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
+                  description="Crea nuevos valores de columna aplicando expresiones a las columnas de entrada de la transformación. Crea nuevas columnas o sobrescribe las columnas existentes. Por ejemplo, se concatenan los valores de las columnas 'nombre' y 'apellidos' para crear una columna 'nombre completo'."
+                  name="Columna derivada 1"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Dimensiones\CreditCardDim\Columna derivada 1.Inputs[Entrada de columna derivada]"
+                      description="Entrada en la transformación Columna derivada"
+                      name="Entrada de columna derivada">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Dimensiones\CreditCardDim\Columna derivada 1.Outputs[Salida de columna derivada]"
+                      description="Salida predeterminada de la transformación Columna derivada"
+                      exclusionGroup="1"
+                      name="Salida de columna derivada"
+                      synchronousInputId="Package\Dimensiones\CreditCardDim\Columna derivada 1.Inputs[Entrada de columna derivada]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Columna derivada 1.Outputs[Salida de columna derivada].Columns[FechaInicio]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Cálculo"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Dimensiones\CreditCardDim\Columna derivada 1.Outputs[Salida de columna derivada].Columns[FechaInicio]"
+                          name="FechaInicio"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expresión de columna derivada"
+                              name="Expression">(DT_DBDATE)[GETDATE]()</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expresión descriptiva de columna derivada"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_DBDATE)GETDATE()</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Columna derivada 1.Outputs[Salida de columna derivada].Columns[FechaFinal]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Cálculo"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Dimensiones\CreditCardDim\Columna derivada 1.Outputs[Salida de columna derivada].Columns[FechaFinal]"
+                          name="FechaFinal"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expresión de columna derivada"
+                              name="Expression">(DT_DBDATE)"31-12-9999"</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expresión descriptiva de columna derivada"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_DBDATE)"31-12-9999"</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Dimensiones\CreditCardDim\Columna derivada 1.Outputs[Salida de error de columna derivada]"
+                      description="Salida de error de la transformación Columna derivada"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Salida de error de columna derivada"
+                      synchronousInputId="Package\Dimensiones\CreditCardDim\Columna derivada 1.Inputs[Entrada de columna derivada]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Columna derivada 1.Outputs[Salida de error de columna derivada].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Dimensiones\CreditCardDim\Columna derivada 1.Outputs[Salida de error de columna derivada].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Columna derivada 1.Outputs[Salida de error de columna derivada].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Dimensiones\CreditCardDim\Columna derivada 1.Outputs[Salida de error de columna derivada].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Dimensiones\CreditCardDim\Comando de OLE DB"
+                  componentClassID="Microsoft.OLEDBCommand"
+                  contactInfo="Comando de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;2"
+                  description="Ejecuta una instrucción SQL para cada fila de un flujo de datos. Por ejemplo, se usa para llamar al procedimiento almacenado de configuración de nuevo empleado para cada fila de la tabla de nuevos empleados. Nota: la ejecución de una instrucción SQL para cada fila de un flujo de datos de gran tamaño puede tardar mucho tiempo."
+                  name="Comando de OLE DB"
+                  usesDispositions="true"
+                  version="2">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Comando SQL para ejecutar."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [dbo].[CreditCardDim] SET [FechaFinal] = ? WHERE [CreditCardID] = ? AND [FechaFinal] = '9999-12-31'</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                      name="DefaultCodePage">1252</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Dimensiones\CreditCardDim\Comando de OLE DB.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[SISTEMA37\SQLSERVER2019.AdventureWorks2019]"
+                      connectionManagerRefId="Package.ConnectionManagers[SISTEMA37\SQLSERVER2019.AdventureWorks2019]"
+                      description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Dimensiones\CreditCardDim\Comando de OLE DB.Inputs[Entrada de comando de OLE DB]"
+                      errorOrTruncationOperation="Ejecución de comando"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Entrada de comando de OLE DB">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Comando de OLE DB.Inputs[Entrada de comando de OLE DB].Columns[CreditCardID]"
+                          cachedDataType="i4"
+                          cachedName="CreditCardID"
+                          externalMetadataColumnId="Package\Dimensiones\CreditCardDim\Comando de OLE DB.Inputs[Entrada de comando de OLE DB].ExternalColumns[Param_1]"
+                          lineageId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CreditCardID]" />
+                        <inputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Comando de OLE DB.Inputs[Entrada de comando de OLE DB].Columns[FechaFinal]"
+                          cachedDataType="dbDate"
+                          cachedName="FechaFinal"
+                          externalMetadataColumnId="Package\Dimensiones\CreditCardDim\Comando de OLE DB.Inputs[Entrada de comando de OLE DB].ExternalColumns[Param_0]"
+                          lineageId="Package\Dimensiones\CreditCardDim\Columna derivada.Outputs[Salida de columna derivada].Columns[FechaFinal]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Dimensiones\CreditCardDim\Comando de OLE DB.Inputs[Entrada de comando de OLE DB].ExternalColumns[Param_0]"
+                          dataType="dbDate"
+                          name="Param_0">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Información de parámetros. Coincide con los valores de DBPARAMFLAGSENUM de OLE DB."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Dimensiones\CreditCardDim\Comando de OLE DB.Inputs[Entrada de comando de OLE DB].ExternalColumns[Param_1]"
+                          dataType="i4"
+                          name="Param_1">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Información de parámetros. Coincide con los valores de DBPARAMFLAGSENUM de OLE DB."
+                              name="DBParamInfoFlags">81</property>
+                          </properties>
+                        </externalMetadataColumn>
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Dimensiones\CreditCardDim\Comando de OLE DB.Outputs[Salida de comando de OLE DB]"
+                      exclusionGroup="1"
+                      name="Salida de comando de OLE DB"
+                      synchronousInputId="Package\Dimensiones\CreditCardDim\Comando de OLE DB.Inputs[Entrada de comando de OLE DB]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Dimensiones\CreditCardDim\Comando de OLE DB.Outputs[Salida de error de comando de OLE DB]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Salida de error de comando de OLE DB"
+                      synchronousInputId="Package\Dimensiones\CreditCardDim\Comando de OLE DB.Inputs[Entrada de comando de OLE DB]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Comando de OLE DB.Outputs[Salida de error de comando de OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Dimensiones\CreditCardDim\Comando de OLE DB.Outputs[Salida de error de comando de OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Comando de OLE DB.Outputs[Salida de error de comando de OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Dimensiones\CreditCardDim\Comando de OLE DB.Outputs[Salida de error de comando de OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Dimensiones\CreditCardDim\Dimensión de variación lenta"
+                  componentClassID="Microsoft.SCD"
+                  contactInfo="Dimensión de variación lenta;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;3"
+                  description="Actualiza una dimensión del almacenamiento de datos de SQL Server Analysis Services. Actualiza los registros de dimensión existentes e inserta los registros de dimensión que faltan. Por ejemplo, se actualiza la tabla DimProduct de la base de datos OLAP AdventureWorksDW con datos procedentes de la tabla Products de la base de datos OLTP AdventureWorks."
+                  name="Dimensión de variación lenta"
+                  version="3">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Especifica la instrucción SELECT utilizada para crear un conjunto de filas de esquema."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT [CardNumber], [CreditCardID],[FechaInicio],[FechaFinal] FROM [dbo].[CreditCardDim]</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica la cláusula WHERE de la instrucción SELECT que selecciona la fila actual de entre filas con claves empresariales idénticas."
+                      name="CurrentRowWhere">[FechaInicio] IS NOT NULL AND [FechaFinal] = '9999-12-31'</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indica si las actualizaciones de atributos históricos se dirigen a la salida de transformación para actualizaciones de atributos variables."
+                      name="UpdateChangingAttributeHistory">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indica si se produce un error de transformación cuando las columnas con atributos fijos contienen cambios."
+                      name="FailOnFixedAttributeChange">true</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica el nombre de columna para el miembro deducido."
+                      name="InferredMemberIndicator"></property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indica si se detectan las actualizaciones de miembros deducidos."
+                      name="EnableInferredMember">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indica si se produce un error de transformación cuando se produce un error de búsqueda de un registro existente."
+                      name="FailOnLookupFailure">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica que todas las filas de la entrada sean nuevas o que la transformación detecte el tipo de cambio."
+                      name="IncomingRowChangeType"
+                      typeConverter="IncomingRowChangeType">1</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                      name="DefaultCodePage">1252</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Dimensiones\CreditCardDim\Dimensión de variación lenta.Connections[LookupConnection]"
+                      connectionManagerID="Package.ConnectionManagers[SISTEMA37\SQLSERVER2019.AdventureWorks2019]"
+                      connectionManagerRefId="Package.ConnectionManagers[SISTEMA37\SQLSERVER2019.AdventureWorks2019]"
+                      description="Define la conexión que se debe usar para búsquedas en la tabla de dimensiones"
+                      name="LookupConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Dimensiones\CreditCardDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta]"
+                      name="Entrada de dimensión de variación lenta">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta].Columns[CardNumber]"
+                          cachedDataType="wstr"
+                          cachedLength="25"
+                          cachedName="CardNumber"
+                          externalMetadataColumnId="Package\Dimensiones\CreditCardDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta].ExternalColumns[CardNumber]"
+                          lineageId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CardNumber]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              name="ColumnType"
+                              typeConverter="ColumnType">3</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta].Columns[CreditCardID]"
+                          cachedDataType="i4"
+                          cachedName="CreditCardID"
+                          externalMetadataColumnId="Package\Dimensiones\CreditCardDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta].ExternalColumns[CreditCardID]"
+                          lineageId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CreditCardID]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              name="ColumnType"
+                              typeConverter="ColumnType">1</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Dimensiones\CreditCardDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta].ExternalColumns[CardNumber]"
+                          dataType="wstr"
+                          length="25"
+                          name="CardNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Dimensiones\CreditCardDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta].ExternalColumns[CreditCardID]"
+                          dataType="i4"
+                          name="CreditCardID" />
+                        <externalMetadataColumn
+                          refId="Package\Dimensiones\CreditCardDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta].ExternalColumns[FechaInicio]"
+                          dataType="dbDate"
+                          name="FechaInicio" />
+                        <externalMetadataColumn
+                          refId="Package\Dimensiones\CreditCardDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta].ExternalColumns[FechaFinal]"
+                          dataType="dbDate"
+                          name="FechaFinal" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Dimensiones\CreditCardDim\Dimensión de variación lenta.Outputs[Salida sin cambios]"
+                      description="Filas sin cambios"
+                      exclusionGroup="1"
+                      name="Salida sin cambios"
+                      synchronousInputId="Package\Dimensiones\CreditCardDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Dimensiones\CreditCardDim\Dimensión de variación lenta.Outputs[Nueva salida]"
+                      description="Nuevas filas"
+                      exclusionGroup="1"
+                      name="Nueva salida"
+                      synchronousInputId="Package\Dimensiones\CreditCardDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Dimensiones\CreditCardDim\Dimensión de variación lenta.Outputs[Salida de atributo fijo]"
+                      description="Filas con cambios en columnas etiquetadas FixedAttribute"
+                      exclusionGroup="1"
+                      name="Salida de atributo fijo"
+                      synchronousInputId="Package\Dimensiones\CreditCardDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Dimensiones\CreditCardDim\Dimensión de variación lenta.Outputs[Salida de actualizaciones de atributos variables]"
+                      description="Estas filas contienen información nueva para cambios de columnas ChangingAttribute (tipo 1)"
+                      exclusionGroup="1"
+                      name="Salida de actualizaciones de atributos variables"
+                      synchronousInputId="Package\Dimensiones\CreditCardDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Dimensiones\CreditCardDim\Dimensión de variación lenta.Outputs[Salida de inserciones de atributos históricos]"
+                      description="Los cambios de HistoricalAttribute (tipo 2) crean estas nuevas filas"
+                      exclusionGroup="2"
+                      name="Salida de inserciones de atributos históricos"
+                      synchronousInputId="Package\Dimensiones\CreditCardDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Dimensiones\CreditCardDim\Dimensión de variación lenta.Outputs[Salida de actualizaciones de miembros deducidos]"
+                      description="Información para actualizar fila de dimensión inicial sin rellenar"
+                      exclusionGroup="1"
+                      name="Salida de actualizaciones de miembros deducidos"
+                      synchronousInputId="Package\Dimensiones\CreditCardDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Dimensiones\CreditCardDim\Insert Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="Destino de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+                  description="Destino de OLE DB"
+                  name="Insert Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                      name="OpenRowset">[dbo].[CreditCardDim]</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="Comando SQL para ejecutar."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Solo se aplica si está activada la carga rápida."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indica si las columnas que contienen NULL tendrán NULL insertado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica opciones para usar con la carga rápida. Solo se aplica si está activada la carga rápida."
+                      name="FastLoadOptions"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos. Solo se aplica si está activada la carga rápida."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Dimensiones\CreditCardDim\Insert Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[SISTEMA37\SQLSERVER2019.AdventureWorks2019]"
+                      connectionManagerRefId="Package.ConnectionManagers[SISTEMA37\SQLSERVER2019.AdventureWorks2019]"
+                      description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Dimensiones\CreditCardDim\Insert Destination.Inputs[Entrada de destino de OLE DB]"
+                      errorOrTruncationOperation="Insertar"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Entrada de destino de OLE DB">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Insert Destination.Inputs[Entrada de destino de OLE DB].Columns[CreditCardID]"
+                          cachedDataType="i4"
+                          cachedName="CreditCardID"
+                          externalMetadataColumnId="Package\Dimensiones\CreditCardDim\Insert Destination.Inputs[Entrada de destino de OLE DB].ExternalColumns[CreditCardID]"
+                          lineageId="Package\Dimensiones\CreditCardDim\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CreditCardID]" />
+                        <inputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Insert Destination.Inputs[Entrada de destino de OLE DB].Columns[CardNumber]"
+                          cachedDataType="wstr"
+                          cachedLength="25"
+                          cachedName="CardNumber"
+                          externalMetadataColumnId="Package\Dimensiones\CreditCardDim\Insert Destination.Inputs[Entrada de destino de OLE DB].ExternalColumns[CardNumber]"
+                          lineageId="Package\Dimensiones\CreditCardDim\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CardNumber]" />
+                        <inputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Insert Destination.Inputs[Entrada de destino de OLE DB].Columns[CreditCardBillinAddress]"
+                          cachedDataType="i4"
+                          cachedName="CreditCardBillinAddress"
+                          externalMetadataColumnId="Package\Dimensiones\CreditCardDim\Insert Destination.Inputs[Entrada de destino de OLE DB].ExternalColumns[CreditCardBillinAddress]"
+                          lineageId="Package\Dimensiones\CreditCardDim\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CreditCardBillinAddress]" />
+                        <inputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Insert Destination.Inputs[Entrada de destino de OLE DB].Columns[FechaInicio]"
+                          cachedDataType="dbDate"
+                          cachedName="FechaInicio"
+                          externalMetadataColumnId="Package\Dimensiones\CreditCardDim\Insert Destination.Inputs[Entrada de destino de OLE DB].ExternalColumns[FechaInicio]"
+                          lineageId="Package\Dimensiones\CreditCardDim\Columna derivada 1.Outputs[Salida de columna derivada].Columns[FechaInicio]" />
+                        <inputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Insert Destination.Inputs[Entrada de destino de OLE DB].Columns[FechaFinal]"
+                          cachedDataType="dbDate"
+                          cachedName="FechaFinal"
+                          externalMetadataColumnId="Package\Dimensiones\CreditCardDim\Insert Destination.Inputs[Entrada de destino de OLE DB].ExternalColumns[FechaFinal]"
+                          lineageId="Package\Dimensiones\CreditCardDim\Columna derivada 1.Outputs[Salida de columna derivada].Columns[FechaFinal]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Dimensiones\CreditCardDim\Insert Destination.Inputs[Entrada de destino de OLE DB].ExternalColumns[CreditCardDimID]"
+                          dataType="i4"
+                          name="CreditCardDimID" />
+                        <externalMetadataColumn
+                          refId="Package\Dimensiones\CreditCardDim\Insert Destination.Inputs[Entrada de destino de OLE DB].ExternalColumns[CreditCardID]"
+                          dataType="i4"
+                          name="CreditCardID" />
+                        <externalMetadataColumn
+                          refId="Package\Dimensiones\CreditCardDim\Insert Destination.Inputs[Entrada de destino de OLE DB].ExternalColumns[CardNumber]"
+                          dataType="wstr"
+                          length="25"
+                          name="CardNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Dimensiones\CreditCardDim\Insert Destination.Inputs[Entrada de destino de OLE DB].ExternalColumns[CreditCardBillinAddress]"
+                          dataType="i4"
+                          name="CreditCardBillinAddress" />
+                        <externalMetadataColumn
+                          refId="Package\Dimensiones\CreditCardDim\Insert Destination.Inputs[Entrada de destino de OLE DB].ExternalColumns[FechaInicio]"
+                          dataType="dbDate"
+                          name="FechaInicio" />
+                        <externalMetadataColumn
+                          refId="Package\Dimensiones\CreditCardDim\Insert Destination.Inputs[Entrada de destino de OLE DB].ExternalColumns[FechaFinal]"
+                          dataType="dbDate"
+                          name="FechaFinal" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Dimensiones\CreditCardDim\Insert Destination.Outputs[Salida de error de destino de OLE DB]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Salida de error de destino de OLE DB"
+                      synchronousInputId="Package\Dimensiones\CreditCardDim\Insert Destination.Inputs[Entrada de destino de OLE DB]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Insert Destination.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Dimensiones\CreditCardDim\Insert Destination.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Insert Destination.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Dimensiones\CreditCardDim\Insert Destination.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Dimensiones\CreditCardDim\Origen de OLE DB"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
+                  description="Origen de OLE DB"
+                  name="Origen de OLE DB"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                      name="OpenRowset">[Sales].[CreditCard]</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="Comando SQL para ejecutar."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">Select
+cc.CreditCardID,
+cc.CardNumber,
+soh.BillToAddressID as CreditCardBillinAddress
+from Sales.CreditCard cc
+inner join Sales.SalesOrderHeader soh
+on soh.CreditCardID = cc.CreditCardID</property>
+                    <property
+                      dataType="System.String"
+                      description="Variable que contiene el comando SQL para ejecutar."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="Asignaciones entre los parámetros del comando SQL y las variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[SISTEMA37\SQLSERVER2019.AdventureWorks2019]"
+                      connectionManagerRefId="Package.ConnectionManagers[SISTEMA37\SQLSERVER2019.AdventureWorks2019]"
+                      description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB]"
+                      name="Salida de origen de OLE DB">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CreditCardID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[CreditCardID]"
+                          lineageId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CreditCardID]"
+                          name="CreditCardID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CardNumber]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[CardNumber]"
+                          length="25"
+                          lineageId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CardNumber]"
+                          name="CardNumber"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CreditCardBillinAddress]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[CreditCardBillinAddress]"
+                          lineageId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CreditCardBillinAddress]"
+                          name="CreditCardBillinAddress"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[CreditCardID]"
+                          dataType="i4"
+                          name="CreditCardID" />
+                        <externalMetadataColumn
+                          refId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[CardNumber]"
+                          dataType="wstr"
+                          length="25"
+                          name="CardNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[CreditCardBillinAddress]"
+                          dataType="i4"
+                          name="CreditCardBillinAddress" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB]"
+                      isErrorOut="true"
+                      name="Salida de error de origen de OLE DB">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[CreditCardID]"
+                          dataType="i4"
+                          lineageId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[CreditCardID]"
+                          name="CreditCardID" />
+                        <outputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[CardNumber]"
+                          dataType="wstr"
+                          length="25"
+                          lineageId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[CardNumber]"
+                          name="CardNumber" />
+                        <outputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[CreditCardBillinAddress]"
+                          dataType="i4"
+                          lineageId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[CreditCardBillinAddress]"
+                          name="CreditCardBillinAddress" />
+                        <outputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Dimensiones\CreditCardDim\Unión de todo"
+                  componentClassID="Microsoft.UnionAll"
+                  contactInfo="Unión de todo;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+                  description="Combina las filas de varios flujos de datos sin ordenarlos. Por ejemplo, devuelve filas a un flujo de datos después de corregir los errores. Si el orden es importante, se recomienda usar la transformación Mezclar."
+                  name="Unión de todo"
+                  version="1">
+                  <inputs>
+                    <input
+                      refId="Package\Dimensiones\CreditCardDim\Unión de todo.Inputs[Entrada de Unión de todo 1]"
+                      name="Entrada de Unión de todo 1">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Unión de todo.Inputs[Entrada de Unión de todo 1].Columns[CreditCardID]"
+                          cachedDataType="i4"
+                          cachedName="CreditCardID"
+                          lineageId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CreditCardID]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Id. de linaje de columna de salida"
+                              name="OutputColumnLineageID">#{Package\Dimensiones\CreditCardDim\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CreditCardID]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Unión de todo.Inputs[Entrada de Unión de todo 1].Columns[CardNumber]"
+                          cachedDataType="wstr"
+                          cachedLength="25"
+                          cachedName="CardNumber"
+                          lineageId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CardNumber]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Id. de linaje de columna de salida"
+                              name="OutputColumnLineageID">#{Package\Dimensiones\CreditCardDim\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CardNumber]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Unión de todo.Inputs[Entrada de Unión de todo 1].Columns[CreditCardBillinAddress]"
+                          cachedDataType="i4"
+                          cachedName="CreditCardBillinAddress"
+                          lineageId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CreditCardBillinAddress]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Id. de linaje de columna de salida"
+                              name="OutputColumnLineageID">#{Package\Dimensiones\CreditCardDim\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CreditCardBillinAddress]}</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                    <input
+                      refId="Package\Dimensiones\CreditCardDim\Unión de todo.Inputs[Entrada de Unión de todo 2]"
+                      hasSideEffects="true"
+                      name="Entrada de Unión de todo 2">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Unión de todo.Inputs[Entrada de Unión de todo 2].Columns[CreditCardID]"
+                          cachedDataType="i4"
+                          cachedName="CreditCardID"
+                          lineageId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CreditCardID]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Id. de linaje de columna de salida"
+                              name="OutputColumnLineageID">#{Package\Dimensiones\CreditCardDim\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CreditCardID]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Unión de todo.Inputs[Entrada de Unión de todo 2].Columns[CardNumber]"
+                          cachedDataType="wstr"
+                          cachedLength="25"
+                          cachedName="CardNumber"
+                          lineageId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CardNumber]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Id. de linaje de columna de salida"
+                              name="OutputColumnLineageID">#{Package\Dimensiones\CreditCardDim\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CardNumber]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Unión de todo.Inputs[Entrada de Unión de todo 2].Columns[CreditCardBillinAddress]"
+                          cachedDataType="i4"
+                          cachedName="CreditCardBillinAddress"
+                          lineageId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CreditCardBillinAddress]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Id. de linaje de columna de salida"
+                              name="OutputColumnLineageID">#{Package\Dimensiones\CreditCardDim\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CreditCardBillinAddress]}</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                    <input
+                      refId="Package\Dimensiones\CreditCardDim\Unión de todo.Inputs[Entrada de Unión de todo 3]"
+                      dangling="true"
+                      hasSideEffects="true"
+                      name="Entrada de Unión de todo 3">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Dimensiones\CreditCardDim\Unión de todo.Outputs[Salida de Unión de todo 1]"
+                      name="Salida de Unión de todo 1">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CreditCardID]"
+                          dataType="i4"
+                          lineageId="Package\Dimensiones\CreditCardDim\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CreditCardID]"
+                          name="CreditCardID" />
+                        <outputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CardNumber]"
+                          dataType="wstr"
+                          length="25"
+                          lineageId="Package\Dimensiones\CreditCardDim\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CardNumber]"
+                          name="CardNumber" />
+                        <outputColumn
+                          refId="Package\Dimensiones\CreditCardDim\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CreditCardBillinAddress]"
+                          dataType="i4"
+                          lineageId="Package\Dimensiones\CreditCardDim\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CreditCardBillinAddress]"
+                          name="CreditCardBillinAddress" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Dimensiones\CreditCardDim.Paths[Nueva salida]"
+                  endId="Package\Dimensiones\CreditCardDim\Unión de todo.Inputs[Entrada de Unión de todo 1]"
+                  name="Nueva salida"
+                  startId="Package\Dimensiones\CreditCardDim\Dimensión de variación lenta.Outputs[Nueva salida]" />
+                <path
+                  refId="Package\Dimensiones\CreditCardDim.Paths[Salida de columna derivada]"
+                  endId="Package\Dimensiones\CreditCardDim\Comando de OLE DB.Inputs[Entrada de comando de OLE DB]"
+                  name="Salida de columna derivada"
+                  startId="Package\Dimensiones\CreditCardDim\Columna derivada.Outputs[Salida de columna derivada]" />
+                <path
+                  refId="Package\Dimensiones\CreditCardDim.Paths[Salida de columna derivada1]"
+                  endId="Package\Dimensiones\CreditCardDim\Insert Destination.Inputs[Entrada de destino de OLE DB]"
+                  name="Salida de columna derivada"
+                  startId="Package\Dimensiones\CreditCardDim\Columna derivada 1.Outputs[Salida de columna derivada]" />
+                <path
+                  refId="Package\Dimensiones\CreditCardDim.Paths[Salida de comando de OLE DB]"
+                  endId="Package\Dimensiones\CreditCardDim\Unión de todo.Inputs[Entrada de Unión de todo 2]"
+                  name="Salida de comando de OLE DB"
+                  startId="Package\Dimensiones\CreditCardDim\Comando de OLE DB.Outputs[Salida de comando de OLE DB]" />
+                <path
+                  refId="Package\Dimensiones\CreditCardDim.Paths[Salida de inserciones de atributos históricos]"
+                  endId="Package\Dimensiones\CreditCardDim\Columna derivada.Inputs[Entrada de columna derivada]"
+                  name="Salida de inserciones de atributos históricos"
+                  startId="Package\Dimensiones\CreditCardDim\Dimensión de variación lenta.Outputs[Salida de inserciones de atributos históricos]" />
+                <path
+                  refId="Package\Dimensiones\CreditCardDim.Paths[Salida de origen de OLE DB]"
+                  endId="Package\Dimensiones\CreditCardDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta]"
+                  name="Salida de origen de OLE DB"
+                  startId="Package\Dimensiones\CreditCardDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB]" />
+                <path
+                  refId="Package\Dimensiones\CreditCardDim.Paths[Salida de Unión de todo 1]"
+                  endId="Package\Dimensiones\CreditCardDim\Columna derivada 1.Inputs[Entrada de columna derivada]"
+                  name="Salida de Unión de todo 1"
+                  startId="Package\Dimensiones\CreditCardDim\Unión de todo.Outputs[Salida de Unión de todo 1]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Dimensiones\CustomerDim"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Tarea Flujo de datos"
+          DTS:DTSID="{6F1AB706-6F83-4C67-9B0C-B294D835F8B2}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="CustomerDim"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Dimensiones\CustomerDim\Columna derivada"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Columna derivada;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
+                  description="Crea nuevos valores de columna aplicando expresiones a las columnas de entrada de la transformación. Crea nuevas columnas o sobrescribe las columnas existentes. Por ejemplo, se concatenan los valores de las columnas 'nombre' y 'apellidos' para crear una columna 'nombre completo'."
+                  name="Columna derivada"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Dimensiones\CustomerDim\Columna derivada.Inputs[Entrada de columna derivada]"
+                      description="Entrada en la transformación Columna derivada"
+                      name="Entrada de columna derivada">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Dimensiones\CustomerDim\Columna derivada.Outputs[Salida de columna derivada]"
+                      description="Salida predeterminada de la transformación Columna derivada"
+                      exclusionGroup="1"
+                      name="Salida de columna derivada"
+                      synchronousInputId="Package\Dimensiones\CustomerDim\Columna derivada.Inputs[Entrada de columna derivada]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dimensiones\CustomerDim\Columna derivada.Outputs[Salida de columna derivada].Columns[FechaFinal]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Cálculo"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Dimensiones\CustomerDim\Columna derivada.Outputs[Salida de columna derivada].Columns[FechaFinal]"
+                          name="FechaFinal"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expresión de columna derivada"
+                              name="Expression">(DT_DBDATE)[GETDATE]()</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expresión descriptiva de columna derivada"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_DBDATE)GETDATE()</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Dimensiones\CustomerDim\Columna derivada.Outputs[Salida de error de columna derivada]"
+                      description="Salida de error de la transformación Columna derivada"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Salida de error de columna derivada"
+                      synchronousInputId="Package\Dimensiones\CustomerDim\Columna derivada.Inputs[Entrada de columna derivada]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dimensiones\CustomerDim\Columna derivada.Outputs[Salida de error de columna derivada].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Dimensiones\CustomerDim\Columna derivada.Outputs[Salida de error de columna derivada].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Dimensiones\CustomerDim\Columna derivada.Outputs[Salida de error de columna derivada].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Dimensiones\CustomerDim\Columna derivada.Outputs[Salida de error de columna derivada].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Dimensiones\CustomerDim\Columna derivada 1"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Columna derivada;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
+                  description="Crea nuevos valores de columna aplicando expresiones a las columnas de entrada de la transformación. Crea nuevas columnas o sobrescribe las columnas existentes. Por ejemplo, se concatenan los valores de las columnas 'nombre' y 'apellidos' para crear una columna 'nombre completo'."
+                  name="Columna derivada 1"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Dimensiones\CustomerDim\Columna derivada 1.Inputs[Entrada de columna derivada]"
+                      description="Entrada en la transformación Columna derivada"
+                      name="Entrada de columna derivada">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Dimensiones\CustomerDim\Columna derivada 1.Outputs[Salida de columna derivada]"
+                      description="Salida predeterminada de la transformación Columna derivada"
+                      exclusionGroup="1"
+                      name="Salida de columna derivada"
+                      synchronousInputId="Package\Dimensiones\CustomerDim\Columna derivada 1.Inputs[Entrada de columna derivada]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dimensiones\CustomerDim\Columna derivada 1.Outputs[Salida de columna derivada].Columns[FechaInicio]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Cálculo"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Dimensiones\CustomerDim\Columna derivada 1.Outputs[Salida de columna derivada].Columns[FechaInicio]"
+                          name="FechaInicio"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expresión de columna derivada"
+                              name="Expression">(DT_DBDATE)[GETDATE]()</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expresión descriptiva de columna derivada"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_DBDATE)GETDATE()</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Dimensiones\CustomerDim\Columna derivada 1.Outputs[Salida de columna derivada].Columns[FechaFinal]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Cálculo"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Dimensiones\CustomerDim\Columna derivada 1.Outputs[Salida de columna derivada].Columns[FechaFinal]"
+                          name="FechaFinal"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expresión de columna derivada"
+                              name="Expression">(DT_DBDATE)"31-12-9999"</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expresión descriptiva de columna derivada"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_DBDATE)"31-12-9999"</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Dimensiones\CustomerDim\Columna derivada 1.Outputs[Salida de error de columna derivada]"
+                      description="Salida de error de la transformación Columna derivada"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Salida de error de columna derivada"
+                      synchronousInputId="Package\Dimensiones\CustomerDim\Columna derivada 1.Inputs[Entrada de columna derivada]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dimensiones\CustomerDim\Columna derivada 1.Outputs[Salida de error de columna derivada].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Dimensiones\CustomerDim\Columna derivada 1.Outputs[Salida de error de columna derivada].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Dimensiones\CustomerDim\Columna derivada 1.Outputs[Salida de error de columna derivada].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Dimensiones\CustomerDim\Columna derivada 1.Outputs[Salida de error de columna derivada].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Dimensiones\CustomerDim\Comando de OLE DB"
+                  componentClassID="Microsoft.OLEDBCommand"
+                  contactInfo="Comando de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;2"
+                  description="Ejecuta una instrucción SQL para cada fila de un flujo de datos. Por ejemplo, se usa para llamar al procedimiento almacenado de configuración de nuevo empleado para cada fila de la tabla de nuevos empleados. Nota: la ejecución de una instrucción SQL para cada fila de un flujo de datos de gran tamaño puede tardar mucho tiempo."
+                  name="Comando de OLE DB"
+                  usesDispositions="true"
+                  version="2">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Comando SQL para ejecutar."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [dbo].[CustomerDim] SET [FechaFinal] = ? WHERE [CustomerID] = ? AND [FechaFinal] = '9999-12-31'</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                      name="DefaultCodePage">1252</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Dimensiones\CustomerDim\Comando de OLE DB.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[SISTEMA37\SQLSERVER2019.AdventureWorks2019]"
+                      connectionManagerRefId="Package.ConnectionManagers[SISTEMA37\SQLSERVER2019.AdventureWorks2019]"
+                      description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Dimensiones\CustomerDim\Comando de OLE DB.Inputs[Entrada de comando de OLE DB]"
+                      errorOrTruncationOperation="Ejecución de comando"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Entrada de comando de OLE DB">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Dimensiones\CustomerDim\Comando de OLE DB.Inputs[Entrada de comando de OLE DB].Columns[CustomerID]"
+                          cachedDataType="i4"
+                          cachedName="CustomerID"
+                          externalMetadataColumnId="Package\Dimensiones\CustomerDim\Comando de OLE DB.Inputs[Entrada de comando de OLE DB].ExternalColumns[Param_1]"
+                          lineageId="Package\Dimensiones\CustomerDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CustomerID]" />
+                        <inputColumn
+                          refId="Package\Dimensiones\CustomerDim\Comando de OLE DB.Inputs[Entrada de comando de OLE DB].Columns[FechaFinal]"
+                          cachedDataType="dbDate"
+                          cachedName="FechaFinal"
+                          externalMetadataColumnId="Package\Dimensiones\CustomerDim\Comando de OLE DB.Inputs[Entrada de comando de OLE DB].ExternalColumns[Param_0]"
+                          lineageId="Package\Dimensiones\CustomerDim\Columna derivada.Outputs[Salida de columna derivada].Columns[FechaFinal]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Dimensiones\CustomerDim\Comando de OLE DB.Inputs[Entrada de comando de OLE DB].ExternalColumns[Param_0]"
+                          dataType="dbDate"
+                          name="Param_0">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Información de parámetros. Coincide con los valores de DBPARAMFLAGSENUM de OLE DB."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Dimensiones\CustomerDim\Comando de OLE DB.Inputs[Entrada de comando de OLE DB].ExternalColumns[Param_1]"
+                          dataType="i4"
+                          name="Param_1">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Información de parámetros. Coincide con los valores de DBPARAMFLAGSENUM de OLE DB."
+                              name="DBParamInfoFlags">81</property>
+                          </properties>
+                        </externalMetadataColumn>
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Dimensiones\CustomerDim\Comando de OLE DB.Outputs[Salida de comando de OLE DB]"
+                      exclusionGroup="1"
+                      name="Salida de comando de OLE DB"
+                      synchronousInputId="Package\Dimensiones\CustomerDim\Comando de OLE DB.Inputs[Entrada de comando de OLE DB]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Dimensiones\CustomerDim\Comando de OLE DB.Outputs[Salida de error de comando de OLE DB]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Salida de error de comando de OLE DB"
+                      synchronousInputId="Package\Dimensiones\CustomerDim\Comando de OLE DB.Inputs[Entrada de comando de OLE DB]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dimensiones\CustomerDim\Comando de OLE DB.Outputs[Salida de error de comando de OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Dimensiones\CustomerDim\Comando de OLE DB.Outputs[Salida de error de comando de OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Dimensiones\CustomerDim\Comando de OLE DB.Outputs[Salida de error de comando de OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Dimensiones\CustomerDim\Comando de OLE DB.Outputs[Salida de error de comando de OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Dimensiones\CustomerDim\Dimensión de variación lenta"
+                  componentClassID="Microsoft.SCD"
+                  contactInfo="Dimensión de variación lenta;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;3"
+                  description="Actualiza una dimensión del almacenamiento de datos de SQL Server Analysis Services. Actualiza los registros de dimensión existentes e inserta los registros de dimensión que faltan. Por ejemplo, se actualiza la tabla DimProduct de la base de datos OLAP AdventureWorksDW con datos procedentes de la tabla Products de la base de datos OLTP AdventureWorks."
+                  name="Dimensión de variación lenta"
+                  version="3">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Especifica la instrucción SELECT utilizada para crear un conjunto de filas de esquema."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT [CustomerID], [CustomerName],[FechaInicio],[FechaFinal] FROM [dbo].[CustomerDim]</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica la cláusula WHERE de la instrucción SELECT que selecciona la fila actual de entre filas con claves empresariales idénticas."
+                      name="CurrentRowWhere">[FechaInicio] IS NOT NULL AND [FechaFinal] = '9999-12-31'</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indica si las actualizaciones de atributos históricos se dirigen a la salida de transformación para actualizaciones de atributos variables."
+                      name="UpdateChangingAttributeHistory">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indica si se produce un error de transformación cuando las columnas con atributos fijos contienen cambios."
+                      name="FailOnFixedAttributeChange">true</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica el nombre de columna para el miembro deducido."
+                      name="InferredMemberIndicator"></property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indica si se detectan las actualizaciones de miembros deducidos."
+                      name="EnableInferredMember">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indica si se produce un error de transformación cuando se produce un error de búsqueda de un registro existente."
+                      name="FailOnLookupFailure">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica que todas las filas de la entrada sean nuevas o que la transformación detecte el tipo de cambio."
+                      name="IncomingRowChangeType"
+                      typeConverter="IncomingRowChangeType">1</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                      name="DefaultCodePage">1252</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Dimensiones\CustomerDim\Dimensión de variación lenta.Connections[LookupConnection]"
+                      connectionManagerID="Package.ConnectionManagers[SISTEMA37\SQLSERVER2019.AdventureWorks2019]"
+                      connectionManagerRefId="Package.ConnectionManagers[SISTEMA37\SQLSERVER2019.AdventureWorks2019]"
+                      description="Define la conexión que se debe usar para búsquedas en la tabla de dimensiones"
+                      name="LookupConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Dimensiones\CustomerDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta]"
+                      name="Entrada de dimensión de variación lenta">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Dimensiones\CustomerDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta].Columns[CustomerID]"
+                          cachedDataType="i4"
+                          cachedName="CustomerID"
+                          externalMetadataColumnId="Package\Dimensiones\CustomerDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta].ExternalColumns[CustomerID]"
+                          lineageId="Package\Dimensiones\CustomerDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CustomerID]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              name="ColumnType"
+                              typeConverter="ColumnType">1</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Dimensiones\CustomerDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta].Columns[CustomerName]"
+                          cachedDataType="wstr"
+                          cachedLength="101"
+                          cachedName="CustomerName"
+                          externalMetadataColumnId="Package\Dimensiones\CustomerDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta].ExternalColumns[CustomerName]"
+                          lineageId="Package\Dimensiones\CustomerDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CustomerName]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              name="ColumnType"
+                              typeConverter="ColumnType">3</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Dimensiones\CustomerDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta].ExternalColumns[CustomerID]"
+                          dataType="i4"
+                          name="CustomerID" />
+                        <externalMetadataColumn
+                          refId="Package\Dimensiones\CustomerDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta].ExternalColumns[CustomerName]"
+                          dataType="wstr"
+                          length="50"
+                          name="CustomerName" />
+                        <externalMetadataColumn
+                          refId="Package\Dimensiones\CustomerDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta].ExternalColumns[FechaInicio]"
+                          dataType="dbDate"
+                          name="FechaInicio" />
+                        <externalMetadataColumn
+                          refId="Package\Dimensiones\CustomerDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta].ExternalColumns[FechaFinal]"
+                          dataType="dbDate"
+                          name="FechaFinal" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Dimensiones\CustomerDim\Dimensión de variación lenta.Outputs[Salida sin cambios]"
+                      description="Filas sin cambios"
+                      exclusionGroup="1"
+                      name="Salida sin cambios"
+                      synchronousInputId="Package\Dimensiones\CustomerDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Dimensiones\CustomerDim\Dimensión de variación lenta.Outputs[Nueva salida]"
+                      description="Nuevas filas"
+                      exclusionGroup="1"
+                      name="Nueva salida"
+                      synchronousInputId="Package\Dimensiones\CustomerDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Dimensiones\CustomerDim\Dimensión de variación lenta.Outputs[Salida de atributo fijo]"
+                      description="Filas con cambios en columnas etiquetadas FixedAttribute"
+                      exclusionGroup="1"
+                      name="Salida de atributo fijo"
+                      synchronousInputId="Package\Dimensiones\CustomerDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Dimensiones\CustomerDim\Dimensión de variación lenta.Outputs[Salida de actualizaciones de atributos variables]"
+                      description="Estas filas contienen información nueva para cambios de columnas ChangingAttribute (tipo 1)"
+                      exclusionGroup="1"
+                      name="Salida de actualizaciones de atributos variables"
+                      synchronousInputId="Package\Dimensiones\CustomerDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Dimensiones\CustomerDim\Dimensión de variación lenta.Outputs[Salida de inserciones de atributos históricos]"
+                      description="Los cambios de HistoricalAttribute (tipo 2) crean estas nuevas filas"
+                      exclusionGroup="2"
+                      name="Salida de inserciones de atributos históricos"
+                      synchronousInputId="Package\Dimensiones\CustomerDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Dimensiones\CustomerDim\Dimensión de variación lenta.Outputs[Salida de actualizaciones de miembros deducidos]"
+                      description="Información para actualizar fila de dimensión inicial sin rellenar"
+                      exclusionGroup="1"
+                      name="Salida de actualizaciones de miembros deducidos"
+                      synchronousInputId="Package\Dimensiones\CustomerDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Dimensiones\CustomerDim\Insert Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="Destino de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+                  description="Destino de OLE DB"
+                  name="Insert Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                      name="OpenRowset">[dbo].[CustomerDim]</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="Comando SQL para ejecutar."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Solo se aplica si está activada la carga rápida."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indica si las columnas que contienen NULL tendrán NULL insertado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica opciones para usar con la carga rápida. Solo se aplica si está activada la carga rápida."
+                      name="FastLoadOptions"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos. Solo se aplica si está activada la carga rápida."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Dimensiones\CustomerDim\Insert Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[SISTEMA37\SQLSERVER2019.AdventureWorks2019]"
+                      connectionManagerRefId="Package.ConnectionManagers[SISTEMA37\SQLSERVER2019.AdventureWorks2019]"
+                      description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Dimensiones\CustomerDim\Insert Destination.Inputs[Entrada de destino de OLE DB]"
+                      errorOrTruncationOperation="Insertar"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Entrada de destino de OLE DB">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Dimensiones\CustomerDim\Insert Destination.Inputs[Entrada de destino de OLE DB].Columns[CustomerID]"
+                          cachedDataType="i4"
+                          cachedName="CustomerID"
+                          externalMetadataColumnId="Package\Dimensiones\CustomerDim\Insert Destination.Inputs[Entrada de destino de OLE DB].ExternalColumns[CustomerID]"
+                          lineageId="Package\Dimensiones\CustomerDim\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CustomerID]" />
+                        <inputColumn
+                          refId="Package\Dimensiones\CustomerDim\Insert Destination.Inputs[Entrada de destino de OLE DB].Columns[CustomerName]"
+                          cachedDataType="wstr"
+                          cachedLength="101"
+                          cachedName="CustomerName"
+                          externalMetadataColumnId="Package\Dimensiones\CustomerDim\Insert Destination.Inputs[Entrada de destino de OLE DB].ExternalColumns[CustomerName]"
+                          lineageId="Package\Dimensiones\CustomerDim\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CustomerName]" />
+                        <inputColumn
+                          refId="Package\Dimensiones\CustomerDim\Insert Destination.Inputs[Entrada de destino de OLE DB].Columns[FechaInicio]"
+                          cachedDataType="dbDate"
+                          cachedName="FechaInicio"
+                          externalMetadataColumnId="Package\Dimensiones\CustomerDim\Insert Destination.Inputs[Entrada de destino de OLE DB].ExternalColumns[FechaInicio]"
+                          lineageId="Package\Dimensiones\CustomerDim\Columna derivada 1.Outputs[Salida de columna derivada].Columns[FechaInicio]" />
+                        <inputColumn
+                          refId="Package\Dimensiones\CustomerDim\Insert Destination.Inputs[Entrada de destino de OLE DB].Columns[FechaFinal]"
+                          cachedDataType="dbDate"
+                          cachedName="FechaFinal"
+                          externalMetadataColumnId="Package\Dimensiones\CustomerDim\Insert Destination.Inputs[Entrada de destino de OLE DB].ExternalColumns[FechaFinal]"
+                          lineageId="Package\Dimensiones\CustomerDim\Columna derivada 1.Outputs[Salida de columna derivada].Columns[FechaFinal]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Dimensiones\CustomerDim\Insert Destination.Inputs[Entrada de destino de OLE DB].ExternalColumns[CustomerDimID]"
+                          dataType="i4"
+                          name="CustomerDimID" />
+                        <externalMetadataColumn
+                          refId="Package\Dimensiones\CustomerDim\Insert Destination.Inputs[Entrada de destino de OLE DB].ExternalColumns[CustomerID]"
+                          dataType="i4"
+                          name="CustomerID" />
+                        <externalMetadataColumn
+                          refId="Package\Dimensiones\CustomerDim\Insert Destination.Inputs[Entrada de destino de OLE DB].ExternalColumns[CustomerName]"
+                          dataType="wstr"
+                          length="50"
+                          name="CustomerName" />
+                        <externalMetadataColumn
+                          refId="Package\Dimensiones\CustomerDim\Insert Destination.Inputs[Entrada de destino de OLE DB].ExternalColumns[FechaInicio]"
+                          dataType="dbDate"
+                          name="FechaInicio" />
+                        <externalMetadataColumn
+                          refId="Package\Dimensiones\CustomerDim\Insert Destination.Inputs[Entrada de destino de OLE DB].ExternalColumns[FechaFinal]"
+                          dataType="dbDate"
+                          name="FechaFinal" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Dimensiones\CustomerDim\Insert Destination.Outputs[Salida de error de destino de OLE DB]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Salida de error de destino de OLE DB"
+                      synchronousInputId="Package\Dimensiones\CustomerDim\Insert Destination.Inputs[Entrada de destino de OLE DB]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dimensiones\CustomerDim\Insert Destination.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Dimensiones\CustomerDim\Insert Destination.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Dimensiones\CustomerDim\Insert Destination.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Dimensiones\CustomerDim\Insert Destination.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Dimensiones\CustomerDim\Origen de OLE DB"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
+                  description="Origen de OLE DB"
+                  name="Origen de OLE DB"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="Comando SQL para ejecutar."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">Select 
+c.CustomerID,
+p.FirstName + ' '+ p.LastName as [CustomerName]
+from Sales.Customer c
+inner join Person.BusinessEntity sp
+on sp.BusinessEntityID = c.PersonID
+inner join Person.Person p 
+on p.BusinessEntityID = sp.BusinessEntityID</property>
+                    <property
+                      dataType="System.String"
+                      description="Variable que contiene el comando SQL para ejecutar."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="Asignaciones entre los parámetros del comando SQL y las variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Dimensiones\CustomerDim\Origen de OLE DB.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[SISTEMA37\SQLSERVER2019.AdventureWorks2019]"
+                      connectionManagerRefId="Package.ConnectionManagers[SISTEMA37\SQLSERVER2019.AdventureWorks2019]"
+                      description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Dimensiones\CustomerDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB]"
+                      name="Salida de origen de OLE DB">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dimensiones\CustomerDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CustomerID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Dimensiones\CustomerDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[CustomerID]"
+                          lineageId="Package\Dimensiones\CustomerDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CustomerID]"
+                          name="CustomerID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Dimensiones\CustomerDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CustomerName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Dimensiones\CustomerDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[CustomerName]"
+                          length="101"
+                          lineageId="Package\Dimensiones\CustomerDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CustomerName]"
+                          name="CustomerName"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Dimensiones\CustomerDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[CustomerID]"
+                          dataType="i4"
+                          name="CustomerID" />
+                        <externalMetadataColumn
+                          refId="Package\Dimensiones\CustomerDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[CustomerName]"
+                          dataType="wstr"
+                          length="101"
+                          name="CustomerName" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Dimensiones\CustomerDim\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB]"
+                      isErrorOut="true"
+                      name="Salida de error de origen de OLE DB">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dimensiones\CustomerDim\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[CustomerID]"
+                          dataType="i4"
+                          lineageId="Package\Dimensiones\CustomerDim\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[CustomerID]"
+                          name="CustomerID" />
+                        <outputColumn
+                          refId="Package\Dimensiones\CustomerDim\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[CustomerName]"
+                          dataType="wstr"
+                          length="101"
+                          lineageId="Package\Dimensiones\CustomerDim\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[CustomerName]"
+                          name="CustomerName" />
+                        <outputColumn
+                          refId="Package\Dimensiones\CustomerDim\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Dimensiones\CustomerDim\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Dimensiones\CustomerDim\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Dimensiones\CustomerDim\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Dimensiones\CustomerDim\Unión de todo"
+                  componentClassID="Microsoft.UnionAll"
+                  contactInfo="Unión de todo;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+                  description="Combina las filas de varios flujos de datos sin ordenarlos. Por ejemplo, devuelve filas a un flujo de datos después de corregir los errores. Si el orden es importante, se recomienda usar la transformación Mezclar."
+                  name="Unión de todo"
+                  version="1">
+                  <inputs>
+                    <input
+                      refId="Package\Dimensiones\CustomerDim\Unión de todo.Inputs[Entrada de Unión de todo 1]"
+                      name="Entrada de Unión de todo 1">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Dimensiones\CustomerDim\Unión de todo.Inputs[Entrada de Unión de todo 1].Columns[CustomerID]"
+                          cachedDataType="i4"
+                          cachedName="CustomerID"
+                          lineageId="Package\Dimensiones\CustomerDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CustomerID]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Id. de linaje de columna de salida"
+                              name="OutputColumnLineageID">#{Package\Dimensiones\CustomerDim\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CustomerID]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Dimensiones\CustomerDim\Unión de todo.Inputs[Entrada de Unión de todo 1].Columns[CustomerName]"
+                          cachedDataType="wstr"
+                          cachedLength="101"
+                          cachedName="CustomerName"
+                          lineageId="Package\Dimensiones\CustomerDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CustomerName]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Id. de linaje de columna de salida"
+                              name="OutputColumnLineageID">#{Package\Dimensiones\CustomerDim\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CustomerName]}</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                    <input
+                      refId="Package\Dimensiones\CustomerDim\Unión de todo.Inputs[Entrada de Unión de todo 2]"
+                      hasSideEffects="true"
+                      name="Entrada de Unión de todo 2">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Dimensiones\CustomerDim\Unión de todo.Inputs[Entrada de Unión de todo 2].Columns[CustomerID]"
+                          cachedDataType="i4"
+                          cachedName="CustomerID"
+                          lineageId="Package\Dimensiones\CustomerDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CustomerID]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Id. de linaje de columna de salida"
+                              name="OutputColumnLineageID">#{Package\Dimensiones\CustomerDim\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CustomerID]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Dimensiones\CustomerDim\Unión de todo.Inputs[Entrada de Unión de todo 2].Columns[CustomerName]"
+                          cachedDataType="wstr"
+                          cachedLength="101"
+                          cachedName="CustomerName"
+                          lineageId="Package\Dimensiones\CustomerDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CustomerName]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Id. de linaje de columna de salida"
+                              name="OutputColumnLineageID">#{Package\Dimensiones\CustomerDim\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CustomerName]}</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                    <input
+                      refId="Package\Dimensiones\CustomerDim\Unión de todo.Inputs[Entrada de Unión de todo 3]"
+                      dangling="true"
+                      hasSideEffects="true"
+                      name="Entrada de Unión de todo 3">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Dimensiones\CustomerDim\Unión de todo.Outputs[Salida de Unión de todo 1]"
+                      name="Salida de Unión de todo 1">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Dimensiones\CustomerDim\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CustomerID]"
+                          dataType="i4"
+                          lineageId="Package\Dimensiones\CustomerDim\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CustomerID]"
+                          name="CustomerID" />
+                        <outputColumn
+                          refId="Package\Dimensiones\CustomerDim\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CustomerName]"
+                          dataType="wstr"
+                          length="101"
+                          lineageId="Package\Dimensiones\CustomerDim\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[CustomerName]"
+                          name="CustomerName" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Dimensiones\CustomerDim.Paths[Nueva salida]"
+                  endId="Package\Dimensiones\CustomerDim\Unión de todo.Inputs[Entrada de Unión de todo 1]"
+                  name="Nueva salida"
+                  startId="Package\Dimensiones\CustomerDim\Dimensión de variación lenta.Outputs[Nueva salida]" />
+                <path
+                  refId="Package\Dimensiones\CustomerDim.Paths[Salida de columna derivada]"
+                  endId="Package\Dimensiones\CustomerDim\Comando de OLE DB.Inputs[Entrada de comando de OLE DB]"
+                  name="Salida de columna derivada"
+                  startId="Package\Dimensiones\CustomerDim\Columna derivada.Outputs[Salida de columna derivada]" />
+                <path
+                  refId="Package\Dimensiones\CustomerDim.Paths[Salida de columna derivada1]"
+                  endId="Package\Dimensiones\CustomerDim\Insert Destination.Inputs[Entrada de destino de OLE DB]"
+                  name="Salida de columna derivada"
+                  startId="Package\Dimensiones\CustomerDim\Columna derivada 1.Outputs[Salida de columna derivada]" />
+                <path
+                  refId="Package\Dimensiones\CustomerDim.Paths[Salida de comando de OLE DB]"
+                  endId="Package\Dimensiones\CustomerDim\Unión de todo.Inputs[Entrada de Unión de todo 2]"
+                  name="Salida de comando de OLE DB"
+                  startId="Package\Dimensiones\CustomerDim\Comando de OLE DB.Outputs[Salida de comando de OLE DB]" />
+                <path
+                  refId="Package\Dimensiones\CustomerDim.Paths[Salida de inserciones de atributos históricos]"
+                  endId="Package\Dimensiones\CustomerDim\Columna derivada.Inputs[Entrada de columna derivada]"
+                  name="Salida de inserciones de atributos históricos"
+                  startId="Package\Dimensiones\CustomerDim\Dimensión de variación lenta.Outputs[Salida de inserciones de atributos históricos]" />
+                <path
+                  refId="Package\Dimensiones\CustomerDim.Paths[Salida de origen de OLE DB]"
+                  endId="Package\Dimensiones\CustomerDim\Dimensión de variación lenta.Inputs[Entrada de dimensión de variación lenta]"
+                  name="Salida de origen de OLE DB"
+                  startId="Package\Dimensiones\CustomerDim\Origen de OLE DB.Outputs[Salida de origen de OLE DB]" />
+                <path
+                  refId="Package\Dimensiones\CustomerDim.Paths[Salida de Unión de todo 1]"
+                  endId="Package\Dimensiones\CustomerDim\Columna derivada 1.Inputs[Entrada de columna derivada]"
+                  name="Salida de Unión de todo 1"
+                  startId="Package\Dimensiones\CustomerDim\Unión de todo.Outputs[Salida de Unión de todo 1]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Dimensiones.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{16CB8419-ABE5-4BFA-B900-8418CDB9F47A}"
+          DTS:From="Package\Dimensiones\CreditCardDim"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Dimensiones\CustomerDim" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Inicio"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{C14B59E0-EE23-4982-9817-2BC8A3C42A6C}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Inicio">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Inicio\Tarea Ejecutar SQL"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Tarea Ejecutar SQL"
+          DTS:DTSID="{B1BA8F2E-52EC-42A1-BB6E-841BF8DC3A47}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Tarea Ejecutar SQL"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{7AF917C9-3352-46C4-8C92-C8EB1A774876}"
+              SQLTask:SqlStatementSource="EXEC SP_MSFOREACHTABLE 'ALTER TABLE ? NOCHECK CONSTRAINT ALL'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{B800FA11-5006-4B50-872B-9A844E491A54}"
+      DTS:From="Package\Inicio"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Dimensiones" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Inicio\Tarea Ejecutar SQL"
+          TopLeft="41,45" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="252,221"
+          Size="252,264"
+          Id="Package\Inicio"
+          TopLeft="73,30" />
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Dimensiones\CreditCardDim"
+          TopLeft="46,13" />
+        <NodeLayout
+          Size="146,42"
+          Id="Package\Dimensiones\CustomerDim"
+          TopLeft="44,90" />
+        <EdgeLayout
+          Id="Package\Dimensiones.PrecedenceConstraints[Constraint]"
+          TopLeft="119.5,55">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35"
+              Start="0,0"
+              End="0,27.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="257,187"
+          Size="257,230"
+          Id="Package\Dimensiones"
+          TopLeft="398,79" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="325,162">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="73,32"
+              Start="0,0"
+              End="65.5,32">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="32.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="32.5,0"
+                    Point2="36.5,0"
+                    Point3="36.5,4" />
+                  <mssgle:LineSegment
+                    End="36.5,28" />
+                  <mssgle:CubicBezierSegment
+                    Point1="36.5,28"
+                    Point2="36.5,32"
+                    Point3="40.5,32" />
+                  <mssgle:LineSegment
+                    End="65.5,32" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Dimensiones\CreditCardDim">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="170,42"
+          Id="Package\Dimensiones\CreditCardDim\Origen de OLE DB"
+          TopLeft="167,5.5" />
+        <NodeLayout
+          Size="220,42"
+          Id="Package\Dimensiones\CreditCardDim\Dimensión de variación lenta"
+          TopLeft="142,107.5" />
+        <EdgeLayout
+          Id="Package\Dimensiones\CreditCardDim.Paths[Salida de origen de OLE DB]"
+          TopLeft="252,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="168,42"
+          Id="Package\Dimensiones\CreditCardDim\Columna derivada"
+          TopLeft="23,209.5" />
+        <EdgeLayout
+          Id="Package\Dimensiones\CreditCardDim.Paths[Salida de inserciones de atributos históricos]"
+          TopLeft="216.666666666667,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-109.666666666667,60"
+              Start="0,0"
+              End="-109.666666666667,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.2599277978339" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.2599277978339"
+                    Point2="0,24.2599277978339"
+                    Point3="-4,24.2599277978339" />
+                  <mssgle:LineSegment
+                    End="-105.666666666667,24.2599277978339" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-105.666666666667,24.2599277978339"
+                    Point2="-109.666666666667,24.2599277978339"
+                    Point3="-109.666666666667,28.2599277978339" />
+                  <mssgle:LineSegment
+                    End="-109.666666666667,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-151.821575520833,29.2599277978339,193.976484375,10.3349609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="185,42"
+          Id="Package\Dimensiones\CreditCardDim\Comando de OLE DB"
+          TopLeft="5.50000000000003,311.5" />
+        <EdgeLayout
+          Id="Package\Dimensiones\CreditCardDim.Paths[Salida de columna derivada]"
+          TopLeft="107,251.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-9,60"
+              Start="0,0"
+              End="-9,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26"
+                    Point2="0,30"
+                    Point3="-4,30" />
+                  <mssgle:LineSegment
+                    End="-5,30" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-5,30"
+                    Point2="-9,30"
+                    Point3="-9,34" />
+                  <mssgle:LineSegment
+                    End="-9,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="147,42"
+          Id="Package\Dimensiones\CreditCardDim\Unión de todo"
+          TopLeft="178.5,413.5" />
+        <EdgeLayout
+          Id="Package\Dimensiones\CreditCardDim.Paths[Nueva salida]"
+          TopLeft="287.333333333333,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-12.1666666666666,264"
+              Start="0,0"
+              End="-12.1666666666666,256.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,127.417306645704" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,127.417306645704"
+                    Point2="0,131.417306645704"
+                    Point3="-4,131.417306645704" />
+                  <mssgle:LineSegment
+                    End="-8.16666666666663,131.417306645704" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-8.16666666666663,131.417306645704"
+                    Point2="-12.1666666666666,131.417306645704"
+                    Point3="-12.1666666666666,135.417306645704" />
+                  <mssgle:LineSegment
+                    End="-12.1666666666666,256.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-34.3716927083333,136.417306645704,56.57671875,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Dimensiones\CreditCardDim.Paths[Salida de comando de OLE DB]"
+          TopLeft="98,353.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="130.833333333333,60"
+              Start="0,0"
+              End="130.833333333333,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.6123822341857" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.6123822341857"
+                    Point2="0,35.6123822341857"
+                    Point3="4,35.6123822341857" />
+                  <mssgle:LineSegment
+                    End="126.833333333333,35.6123822341857" />
+                  <mssgle:CubicBezierSegment
+                    Point1="126.833333333333,35.6123822341857"
+                    Point2="130.833333333333,35.6123822341857"
+                    Point3="130.833333333333,39.6123822341857" />
+                  <mssgle:LineSegment
+                    End="130.833333333333,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="177,42"
+          Id="Package\Dimensiones\CreditCardDim\Columna derivada 1"
+          TopLeft="163.5,515.5" />
+        <EdgeLayout
+          Id="Package\Dimensiones\CreditCardDim.Paths[Salida de Unión de todo 1]"
+          TopLeft="252,455.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="165,42"
+          Id="Package\Dimensiones\CreditCardDim\Insert Destination"
+          TopLeft="169.5,617.5" />
+        <EdgeLayout
+          Id="Package\Dimensiones\CreditCardDim.Paths[Salida de columna derivada1]"
+          TopLeft="252,557.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Dimensiones\CustomerDim">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="170,42"
+          Id="Package\Dimensiones\CustomerDim\Origen de OLE DB"
+          TopLeft="167,5.5" />
+        <NodeLayout
+          Size="220,42"
+          Id="Package\Dimensiones\CustomerDim\Dimensión de variación lenta"
+          TopLeft="142,107.5" />
+        <EdgeLayout
+          Id="Package\Dimensiones\CustomerDim.Paths[Salida de origen de OLE DB]"
+          TopLeft="252,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="168,42"
+          Id="Package\Dimensiones\CustomerDim\Columna derivada"
+          TopLeft="23,209.5" />
+        <EdgeLayout
+          Id="Package\Dimensiones\CustomerDim.Paths[Salida de inserciones de atributos históricos]"
+          TopLeft="216.666666666667,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-109.666666666667,60"
+              Start="0,0"
+              End="-109.666666666667,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.2599277978339" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.2599277978339"
+                    Point2="0,24.2599277978339"
+                    Point3="-4,24.2599277978339" />
+                  <mssgle:LineSegment
+                    End="-105.666666666667,24.2599277978339" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-105.666666666667,24.2599277978339"
+                    Point2="-109.666666666667,24.2599277978339"
+                    Point3="-109.666666666667,28.2599277978339" />
+                  <mssgle:LineSegment
+                    End="-109.666666666667,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-151.821575520833,29.2599277978339,193.976484375,10.3349609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="185,42"
+          Id="Package\Dimensiones\CustomerDim\Comando de OLE DB"
+          TopLeft="5.50000000000003,311.5" />
+        <EdgeLayout
+          Id="Package\Dimensiones\CustomerDim.Paths[Salida de columna derivada]"
+          TopLeft="107,251.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-9,60"
+              Start="0,0"
+              End="-9,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26"
+                    Point2="0,30"
+                    Point3="-4,30" />
+                  <mssgle:LineSegment
+                    End="-5,30" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-5,30"
+                    Point2="-9,30"
+                    Point3="-9,34" />
+                  <mssgle:LineSegment
+                    End="-9,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="147,42"
+          Id="Package\Dimensiones\CustomerDim\Unión de todo"
+          TopLeft="178.5,413.5" />
+        <EdgeLayout
+          Id="Package\Dimensiones\CustomerDim.Paths[Nueva salida]"
+          TopLeft="287.333333333333,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-12.1666666666666,264"
+              Start="0,0"
+              End="-12.1666666666666,256.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,127.417306645704" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,127.417306645704"
+                    Point2="0,131.417306645704"
+                    Point3="-4,131.417306645704" />
+                  <mssgle:LineSegment
+                    End="-8.16666666666663,131.417306645704" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-8.16666666666663,131.417306645704"
+                    Point2="-12.1666666666666,131.417306645704"
+                    Point3="-12.1666666666666,135.417306645704" />
+                  <mssgle:LineSegment
+                    End="-12.1666666666666,256.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-34.3716927083333,136.417306645704,56.57671875,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Dimensiones\CustomerDim.Paths[Salida de comando de OLE DB]"
+          TopLeft="98,353.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="130.833333333333,60"
+              Start="0,0"
+              End="130.833333333333,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.6123822341857" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.6123822341857"
+                    Point2="0,35.6123822341857"
+                    Point3="4,35.6123822341857" />
+                  <mssgle:LineSegment
+                    End="126.833333333333,35.6123822341857" />
+                  <mssgle:CubicBezierSegment
+                    Point1="126.833333333333,35.6123822341857"
+                    Point2="130.833333333333,35.6123822341857"
+                    Point3="130.833333333333,39.6123822341857" />
+                  <mssgle:LineSegment
+                    End="130.833333333333,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="177,42"
+          Id="Package\Dimensiones\CustomerDim\Columna derivada 1"
+          TopLeft="163.5,515.5" />
+        <EdgeLayout
+          Id="Package\Dimensiones\CustomerDim.Paths[Salida de Unión de todo 1]"
+          TopLeft="252,455.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="165,42"
+          Id="Package\Dimensiones\CustomerDim\Insert Destination"
+          TopLeft="169.5,617.5" />
+        <EdgeLayout
+          Id="Package\Dimensiones\CustomerDim.Paths[Salida de columna derivada1]"
+          TopLeft="252,557.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dimensiones\CreditCardDim\Origen de OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dimensiones\CreditCardDim\Dimensión de variación lenta">
+    <Properties>
+      <Property>
+        <Name>SCDMetadata</Name>
+        <Value
+          type="q2:string">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SCDWizardMetadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionID&gt;{7AF917C9-3352-46C4-8C92-C8EB1A774876}&lt;/ConnectionID&gt;
+  &lt;TableName&gt;[dbo].[CreditCardDim]&lt;/TableName&gt;
+  &lt;InputToColumnsCollection&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Origen de OLE DB.Salidas[Salida de origen de OLE DB].Columnas[CardNumber]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;CardNumber&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;HistoricalAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Origen de OLE DB.Salidas[Salida de origen de OLE DB].Columnas[CreditCardBillinAddress]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;CreditCardBillinAddress&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;None&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Origen de OLE DB.Salidas[Salida de origen de OLE DB].Columnas[CreditCardID]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;CreditCardID&lt;/ColumnName&gt;
+      &lt;KeyType&gt;BusinessKey&lt;/KeyType&gt;
+      &lt;ChangeType&gt;None&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+  &lt;/InputToColumnsCollection&gt;
+  &lt;GeneratedComponentsIdentificationStrings&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Columna derivada&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Comando de OLE DB&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Unión de todo&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Columna derivada 1&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Insert Destination&lt;/anyType&gt;
+  &lt;/GeneratedComponentsIdentificationStrings&gt;
+  &lt;FailFixedAttribute&gt;true&lt;/FailFixedAttribute&gt;
+  &lt;FailChangeAttribute&gt;false&lt;/FailChangeAttribute&gt;
+  &lt;UseStartEndDate&gt;true&lt;/UseStartEndDate&gt;
+  &lt;CurrentIndicatorColumn /&gt;
+  &lt;InferredIndicatorColumn /&gt;
+  &lt;ValueCurrent /&gt;
+  &lt;ValueExpired /&gt;
+  &lt;StartDateColumn&gt;FechaInicio&lt;/StartDateColumn&gt;
+  &lt;EndDateColumn&gt;FechaFinal&lt;/EndDateColumn&gt;
+  &lt;DateVariable&gt;System::StartTime&lt;/DateVariable&gt;
+  &lt;EnableInferredSupport&gt;false&lt;/EnableInferredSupport&gt;
+&lt;/SCDWizardMetadata&gt;</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dimensiones\CreditCardDim\Insert Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dimensiones\CustomerDim\Origen de OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dimensiones\CustomerDim\Dimensión de variación lenta">
+    <Properties>
+      <Property>
+        <Name>SCDMetadata</Name>
+        <Value
+          type="q2:string">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SCDWizardMetadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionID&gt;{7AF917C9-3352-46C4-8C92-C8EB1A774876}&lt;/ConnectionID&gt;
+  &lt;TableName&gt;[dbo].[CustomerDim]&lt;/TableName&gt;
+  &lt;InputToColumnsCollection&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Origen de OLE DB.Salidas[Salida de origen de OLE DB].Columnas[CustomerID]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;CustomerID&lt;/ColumnName&gt;
+      &lt;KeyType&gt;BusinessKey&lt;/KeyType&gt;
+      &lt;ChangeType&gt;None&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Origen de OLE DB.Salidas[Salida de origen de OLE DB].Columnas[CustomerName]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;CustomerName&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;HistoricalAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+  &lt;/InputToColumnsCollection&gt;
+  &lt;GeneratedComponentsIdentificationStrings&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Columna derivada&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Comando de OLE DB&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Unión de todo&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Columna derivada 1&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Insert Destination&lt;/anyType&gt;
+  &lt;/GeneratedComponentsIdentificationStrings&gt;
+  &lt;FailFixedAttribute&gt;true&lt;/FailFixedAttribute&gt;
+  &lt;FailChangeAttribute&gt;false&lt;/FailChangeAttribute&gt;
+  &lt;UseStartEndDate&gt;true&lt;/UseStartEndDate&gt;
+  &lt;CurrentIndicatorColumn /&gt;
+  &lt;InferredIndicatorColumn /&gt;
+  &lt;ValueCurrent /&gt;
+  &lt;ValueExpired /&gt;
+  &lt;StartDateColumn&gt;FechaInicio&lt;/StartDateColumn&gt;
+  &lt;EndDateColumn&gt;FechaFinal&lt;/EndDateColumn&gt;
+  &lt;DateVariable&gt;System::StartTime&lt;/DateVariable&gt;
+  &lt;EnableInferredSupport&gt;false&lt;/EnableInferredSupport&gt;
+&lt;/SCDWizardMetadata&gt;</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dimensiones\CustomerDim\Insert Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
